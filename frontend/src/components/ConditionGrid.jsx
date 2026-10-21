@@ -175,7 +175,7 @@ export default function ConditionGrid() {
 
   const handleCardClick = () => {
     if (Math.abs(dragOffset) > 8) return; // Prevent card click when swiping
-    const el = document.getElementById('catalogue-section');
+    const el = document.getElementById('inventory-section') || document.getElementById('catalogue-section');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }

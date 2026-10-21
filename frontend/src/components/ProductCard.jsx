@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ArrowRight, Check, Star } from 'lucide-react';
+import CartContext from '../context/CartContext';
 
 // Deterministic rating generator for realistic e-commerce presentation
 function getProductRating(id = '') {
@@ -21,6 +22,14 @@ function getProductRating(id = '') {
 export default function ProductCard({ product, onSelectProduct, onAddToCart }) {
   const [isAdded, setIsAdded] = useState(false);
   const [activeDot, setActiveDot] = useState(0);
+  const [localQuantity, setLocalQuantity] = useState(0);
+
+  const cartContext = useContext(CartContext);
+  const cartItem = cartContext?.items?.find(
+    (item) => item.productId === product.id || item.id === product.id
+  );
+  // Quantity taken in cart (using CartContext if present, or localQuantity)
+  const itemsTaken = cartItem ? cartItem.quantity : localQuantity;
 
   const isOutOfStock = product.stock_quantity <= 0;
   const isLowStock = product.stock_quantity > 0 && product.stock_quantity <= 3;
@@ -36,11 +45,14 @@ export default function ProductCard({ product, onSelectProduct, onAddToCart }) {
     e.stopPropagation();
     if (isOutOfStock) return;
 
+    setLocalQuantity((prev) => prev + 1);
     if (onAddToCart) {
       onAddToCart(product);
-      setIsAdded(true);
-      setTimeout(() => setIsAdded(false), 1400);
     }
+    setIsAdded(true);
+    setTimeout(() => {
+      setIsAdded(false);
+    }, 1200);
   };
 
   return (
@@ -161,17 +173,33 @@ export default function ProductCard({ product, onSelectProduct, onAddToCart }) {
             aria-label={
               isOutOfStock
                 ? `${product.name} is out of stock`
+                : itemsTaken > 0
+                ? `${itemsTaken} in Cart. Click to add more.`
                 : `Add ${product.name} to Cart`
             }
-            title={isOutOfStock ? 'Item is out of stock' : 'Add to cart'}
+            title={
+              isOutOfStock
+                ? 'Item is out of stock'
+                : itemsTaken > 0
+                ? `${itemsTaken} in cart - click to add more`
+                : 'Add to cart'
+            }
           >
             <span>
-              {isOutOfStock ? 'Sold Out' : isAdded ? 'Added' : 'Buy Now'}
+              {isOutOfStock
+                ? 'Sold Out'
+                : isAdded
+                ? 'Added'
+                : itemsTaken > 0
+                ? `${itemsTaken} in Cart`
+                : 'Buy Now'}
             </span>
 
             <span className="modern-buy-arrow" aria-hidden="true">
               {isAdded ? (
                 <Check size={14} strokeWidth={2.6} />
+              ) : itemsTaken > 0 ? (
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, lineHeight: 1 }}>+</span>
               ) : (
                 <ArrowRight size={14} strokeWidth={2.4} />
               )}

@@ -13,7 +13,7 @@ export default function Navbar({ user, cartCount = 0, onLogout }) {
 
   const handleCatalogueClick = (e) => {
     if (location.pathname === '/' || location.pathname === '/catalogue') {
-      const el = document.getElementById('catalogue-section');
+      const el = document.getElementById('inventory-section') || document.getElementById('catalogue-section');
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: 'smooth' });

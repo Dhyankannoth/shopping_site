@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 
 // Central Error Handler
 app.use((err, req, res, next) => {
+  console.error('API Error Handler caught error:', err);
   const statusCode = err.status || err.statusCode || 500;
   const isProduction = process.env.NODE_ENV === 'production';
 

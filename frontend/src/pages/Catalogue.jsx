@@ -125,106 +125,111 @@ export default function Catalogue({ onAddToCart }) {
         transition: 'background-color 0.25s ease, color 0.25s ease',
       }}
     >
-      {/* ── 1. HERO SECTION ── */}
-      <section
-        style={{
-          width: '100%',
-          minHeight: 'calc(100vh - 60px)',
-          backgroundColor: 'var(--bg-main)',
-          padding: '2.75rem 0 2.25rem 0',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'relative',
-          overflow: 'hidden',
-          borderBottom: '1px solid var(--border-subtle)',
-          transition: 'background-color 0.25s ease, border-color 0.25s ease',
-        }}
-      >
-        {/* Main Headline */}
-        <div
-          style={{
-            textAlign: 'center',
-            zIndex: 10,
-            padding: '0 1.5rem',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: 'clamp(2.2rem, 4.8vw, 3.8rem)',
-              fontWeight: 800,
-              lineHeight: 1.08,
-              letterSpacing: '-0.035em',
-              color: 'var(--text-main)',
-              margin: 0,
-            }}
-          >
-            Every frame,<br />
-            brought into focus.
-          </h2>
-        </div>
-
-        {/* 3D Tilted Cylinder Grid Stream - Full width, explicit height for container query resolution */}
-        <div
-          style={{
-            width: '100%',
-            height: 'clamp(440px, 58vh, 680px)',
-            minHeight: '440px',
-            position: 'relative',
-            margin: '0.5rem 0',
-          }}
-        >
-          <TiltedGridHero
-            images={HERO_FRAMES}
-            speed={4.5}
-            tileHeight={40}
-            aspectRatio={16 / 10}
-            gap={6}
-            axis={50}
-            curve={80}
-            fade={12}
+      {/* ── 1. ENTIRE LANDING PAGE (VISITORS ONLY) ── */}
+      {!isAuthenticated && (
+        <>
+          {/* 1.1 Hero Section */}
+          <section
             style={{
               width: '100%',
-              height: '100%',
-              minHeight: '440px',
-              backgroundColor: 'transparent',
-            }}
-          />
-        </div>
-
-        {/* Refined VisionBuy tagline */}
-        <div
-          style={{
-            textAlign: 'center',
-            zIndex: 10,
-            padding: '0 1.5rem',
-          }}
-        >
-          <p
-            style={{
-              fontSize: 'clamp(0.95rem, 1.35vw, 1.1rem)',
-              color: 'var(--text-muted)',
-              lineHeight: 1.5,
-              fontWeight: 400,
-              letterSpacing: '-0.01em',
-              maxWidth: '560px',
-              margin: '0 auto',
+              minHeight: 'calc(100vh - 60px)',
+              backgroundColor: 'var(--bg-main)',
+              padding: '2.75rem 0 2.25rem 0',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              position: 'relative',
+              overflow: 'hidden',
+              borderBottom: '1px solid var(--border-subtle)',
+              transition: 'background-color 0.25s ease, border-color 0.25s ease',
             }}
           >
-            A clearer vision for every product you buy.
-          </p>
-        </div>
-      </section>
+            {/* Main Headline */}
+            <div
+              style={{
+                textAlign: 'center',
+                zIndex: 10,
+                padding: '0 1.5rem',
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: 'clamp(2.2rem, 4.8vw, 3.8rem)',
+                  fontWeight: 800,
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.035em',
+                  color: 'var(--text-main)',
+                  margin: 0,
+                }}
+              >
+                Every frame,<br />
+                brought into focus.
+              </h2>
+            </div>
 
-      {/* ── 1.5 FEATURED BENTO SHOWCASE ── */}
-      <ConditionGrid />
+            {/* 3D Tilted Cylinder Grid Stream - Full width, explicit height for container query resolution */}
+            <div
+              style={{
+                width: '100%',
+                height: 'clamp(440px, 58vh, 680px)',
+                minHeight: '440px',
+                position: 'relative',
+                margin: '0.5rem 0',
+              }}
+            >
+              <TiltedGridHero
+                images={HERO_FRAMES}
+                speed={4.5}
+                tileHeight={40}
+                aspectRatio={16 / 10}
+                gap={6}
+                axis={50}
+                curve={80}
+                fade={12}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  minHeight: '440px',
+                  backgroundColor: 'transparent',
+                }}
+              />
+            </div>
 
-      {/* ── 2. APPLE CARD CAROUSEL (REPLACES VISIONBUY CATALOGUE) ── */}
-      <AppleCardCarousel onSelectCategory={handleCategorySelect} />
+            {/* Refined VisionBuy tagline */}
+            <div
+              style={{
+                textAlign: 'center',
+                zIndex: 10,
+                padding: '0 1.5rem',
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 'clamp(0.95rem, 1.35vw, 1.1rem)',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.5,
+                  fontWeight: 400,
+                  letterSpacing: '-0.01em',
+                  maxWidth: '560px',
+                  margin: '0 auto',
+                }}
+              >
+                A clearer vision for every product you buy.
+              </p>
+            </div>
+          </section>
 
-      {/* ── 3. STORE INVENTORY SECTION (TEST SUITE ONLY) ── */}
-      {import.meta.env.MODE === 'test' && (
+          {/* 1.2 Featured Bento Showcase */}
+          <ConditionGrid />
+
+          {/* 1.3 Apple Card Carousel */}
+          <AppleCardCarousel onSelectCategory={handleCategorySelect} />
+        </>
+      )}
+
+      {/* ── 2. STORE CATALOGUE INVENTORY ── */}
+      {(isAuthenticated || import.meta.env.MODE === 'test') && (
       <section
         id="inventory-section"
         style={{

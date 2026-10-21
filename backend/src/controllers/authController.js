@@ -42,6 +42,15 @@ export async function register(req, res, next) {
       token,
     });
   } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({
+        error: {
+          code: 'EMAIL_EXISTS',
+          message: 'An account with this email already exists',
+        },
+      });
+    }
+    console.error('Registration error in authController:', error);
     next(error);
   }
 }
