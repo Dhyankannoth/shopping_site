@@ -113,9 +113,9 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="glass-card" style={{ maxWidth: '500px', margin: '4rem auto', padding: '3rem 2rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Cannot Proceed to Checkout</h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Your shopping cart is currently empty.</p>
+      <div className="ui-card" style={{ maxWidth: '500px', margin: 'var(--space-12) auto', padding: 'var(--space-8) var(--space-6)', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: 'var(--space-4)' }}>Cannot Proceed to Checkout</h2>
+        <p style={{ color: 'var(--text-muted)', marginBottom: 'var(--space-6)' }}>Your shopping cart is currently empty.</p>
         <Link to="/" className="btn btn-primary">
           <ArrowLeft size={16} /> Return to Catalogue
         </Link>
@@ -126,10 +126,10 @@ export default function Checkout() {
   const authoritativeTotal = preview?.totalAmount ?? subtotal;
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
       {/* Header */}
       <div>
-        <h1 style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.4rem' }}>
+        <h1 style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 'var(--space-2)' }}>
           Checkout & Payment
         </h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
@@ -142,11 +142,11 @@ export default function Checkout() {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.75rem',
-          padding: '1rem 1.25rem',
+          gap: 'var(--space-3)',
+          padding: 'var(--space-4) var(--space-5)',
           borderRadius: 'var(--radius-md)',
-          background: 'rgba(245, 158, 11, 0.1)',
-          border: '1px solid rgba(245, 158, 11, 0.3)',
+          background: 'rgba(245, 158, 11, 0.08)',
+          border: '1px solid rgba(245, 158, 11, 0.25)',
           color: '#fde68a',
           fontSize: '0.875rem',
         }}
@@ -165,11 +165,11 @@ export default function Checkout() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
-            padding: '1rem 1.25rem',
+            gap: 'var(--space-3)',
+            padding: 'var(--space-4) var(--space-5)',
             borderRadius: 'var(--radius-md)',
             background: 'var(--danger-bg)',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
+            border: '1px solid rgba(239, 68, 68, 0.25)',
             color: '#fca5a5',
             fontSize: '0.9rem',
           }}
@@ -184,15 +184,15 @@ export default function Checkout() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2rem',
+            gap: 'var(--space-8)',
             alignItems: 'start',
           }}
         >
           {/* Left Column: Delivery Details & Payment Method */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
             {/* Step 1: Delivery Details */}
-            <div className="glass-card" style={{ padding: '1.75rem' }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.25rem' }}>
+            <div className="ui-card" style={{ padding: 'var(--space-6)' }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 'var(--space-5)' }}>
                 1. Delivery Details (Demonstration)
               </h2>
 
@@ -272,28 +272,28 @@ export default function Checkout() {
             </div>
 
             {/* Step 2: Simulated Payment Selection */}
-            <div className="glass-card" style={{ padding: '1.75rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem' }}>
+            <div className="ui-card" style={{ padding: 'var(--space-6)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
                 <CreditCard size={20} color="var(--primary)" />
                 <h2 style={{ fontSize: '1.25rem', fontWeight: 700 }}>
                   2. Select Simulated Payment Outcome
                 </h2>
               </div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: 'var(--space-5)' }}>
                 Select a deterministic scenario to test the application response:
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 {/* Option: Success */}
                 <label
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: '0.75rem',
-                    padding: '1rem',
+                    gap: 'var(--space-3)',
+                    padding: 'var(--space-4)',
                     borderRadius: 'var(--radius-md)',
-                    border: `1px solid ${paymentOutcome === 'success' ? 'var(--primary)' : 'var(--border-glass)'}`,
-                    background: paymentOutcome === 'success' ? 'rgba(99, 102, 241, 0.08)' : 'var(--bg-surface-elevated)',
+                    border: `1px solid ${paymentOutcome === 'success' ? 'var(--primary)' : 'var(--border-subtle)'}`,
+                    background: paymentOutcome === 'success' ? 'rgba(245, 158, 11, 0.08)' : 'var(--bg-surface-elevated)',
                     cursor: 'pointer',
                   }}
                 >
@@ -320,10 +320,10 @@ export default function Checkout() {
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: '0.75rem',
-                    padding: '1rem',
+                    gap: 'var(--space-3)',
+                    padding: 'var(--space-4)',
                     borderRadius: 'var(--radius-md)',
-                    border: `1px solid ${paymentOutcome === 'declined' ? 'var(--danger)' : 'var(--border-glass)'}`,
+                    border: `1px solid ${paymentOutcome === 'declined' ? 'var(--danger)' : 'var(--border-subtle)'}`,
                     background: paymentOutcome === 'declined' ? 'rgba(239, 68, 68, 0.08)' : 'var(--bg-surface-elevated)',
                     cursor: 'pointer',
                   }}
@@ -351,10 +351,10 @@ export default function Checkout() {
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: '0.75rem',
-                    padding: '1rem',
+                    gap: 'var(--space-3)',
+                    padding: 'var(--space-4)',
                     borderRadius: 'var(--radius-md)',
-                    border: `1px solid ${paymentOutcome === 'timeout' ? 'var(--warning)' : 'var(--border-glass)'}`,
+                    border: `1px solid ${paymentOutcome === 'timeout' ? 'var(--warning)' : 'var(--border-subtle)'}`,
                     background: paymentOutcome === 'timeout' ? 'rgba(245, 158, 11, 0.08)' : 'var(--bg-surface-elevated)',
                     cursor: 'pointer',
                   }}
@@ -381,13 +381,13 @@ export default function Checkout() {
           </div>
 
           {/* Right Column: Order Review Snapshot & Submit */}
-          <div className="glass-card" style={{ padding: '1.75rem', position: 'sticky', top: '90px' }}>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.25rem' }}>
+          <div className="ui-card" style={{ padding: 'var(--space-6)', position: 'sticky', top: '90px' }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: 'var(--space-5)' }}>
               3. Order Review
             </h2>
 
             {/* Purchased Items List */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem', maxHeight: '240px', overflowY: 'auto' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginBottom: 'var(--space-6)', maxHeight: '240px', overflowY: 'auto' }}>
               {items.map((item) => (
                 <div key={item.productId} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
                   <div style={{ maxWidth: '65%' }}>
@@ -400,7 +400,7 @@ export default function Checkout() {
             </div>
 
             {/* Calculations Breakdown */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                 <span>Subtotal</span>
                 <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>${authoritativeTotal.toFixed(2)}</span>
@@ -411,15 +411,15 @@ export default function Checkout() {
               </div>
               <div
                 style={{
-                  borderTop: '1px solid var(--border-glass)',
-                  paddingTop: '0.85rem',
+                  borderTop: '1px solid var(--border-subtle)',
+                  paddingTop: 'var(--space-3)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
                 }}
               >
-                <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>Total Due</span>
-                <span style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--primary-light)' }}>
+                <span style={{ fontSize: '1.05rem', fontWeight: 700 }}>Total Due</span>
+                <span style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
                   ${authoritativeTotal.toFixed(2)}
                 </span>
               </div>

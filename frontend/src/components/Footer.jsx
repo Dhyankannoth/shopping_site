@@ -4,9 +4,9 @@ import { RotateCcw, ShieldCheck, Database } from 'lucide-react';
 export default function Footer({ onResetDemo }) {
   return (
     <footer style={{
-      borderTop: '1px solid var(--border-glass)',
-      backgroundColor: 'rgba(11, 15, 25, 0.95)',
-      padding: '2.5rem 1.5rem 2rem',
+      borderTop: '1px solid var(--border-subtle)',
+      backgroundColor: 'var(--bg-surface)',
+      padding: 'var(--space-8) var(--space-6) var(--space-6)',
       marginTop: 'auto',
     }}>
       <div style={{
@@ -14,7 +14,7 @@ export default function Footer({ onResetDemo }) {
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.5rem',
+        gap: 'var(--space-6)',
       }}>
         {/* Top Notice */}
         <div style={{
@@ -22,13 +22,13 @@ export default function Footer({ onResetDemo }) {
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1rem',
-          padding: '1rem 1.25rem',
+          gap: 'var(--space-4)',
+          padding: 'var(--space-4) var(--space-5)',
           borderRadius: 'var(--radius-md)',
-          background: 'rgba(30, 41, 59, 0.5)',
-          border: '1px solid var(--border-glass)',
+          background: 'var(--bg-surface-elevated)',
+          border: '1px solid var(--border-subtle)',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
             <ShieldCheck size={20} color="var(--primary)" />
             <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
               <strong>Demonstration Environment:</strong> All checkout and payments are simulated. No real cards or funds are ever used.
@@ -57,7 +57,7 @@ export default function Footer({ onResetDemo }) {
           fontSize: '0.825rem',
           paddingTop: '0.5rem',
         }}>
-          <p>© 2026 Aurora Store. Functional Demonstration Platform.</p>
+          <p>© 2026 VisionBuy. Functional Demonstration Platform.</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span>React.js</span>
             <span>•</span>

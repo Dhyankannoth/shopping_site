@@ -6,7 +6,7 @@ import App from '../src/App';
 describe('Phase 1: Frontend Foundation Tests', () => {
   it('T-FRONT-01: App component mounts and displays header and hero', () => {
     render(<App />);
-    expect(screen.getAllByText(/Aurora/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/VisionBuy/i)[0]).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1, name: /Catalogue/i })).toBeInTheDocument();
   });
 

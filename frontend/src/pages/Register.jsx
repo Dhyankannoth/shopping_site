@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, Mail, Lock, AlertCircle, ArrowRight } from 'lucide-react';
+import { User, Mail, Lock, AlertCircle, ArrowRight, X } from 'lucide-react';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -59,14 +59,60 @@ export default function Register() {
   };
 
   return (
-    <div style={{ maxWidth: '460px', margin: '2.5rem auto', padding: '0 1rem' }}>
-      <div className="glass-card" style={{ padding: '2.5rem 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.72)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1.5rem',
+        overflowY: 'auto',
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) navigate('/');
+      }}
+    >
+      <div
+        className="ui-card"
+        style={{
+          width: '100%',
+          maxWidth: '460px',
+          padding: 'var(--space-8) var(--space-6)',
+          position: 'relative',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+          borderRadius: '20px',
+        }}
+      >
+        <button
+          onClick={() => navigate('/')}
+          aria-label="Close"
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--text-dim)',
+            cursor: 'pointer',
+            padding: '0.4rem',
+            borderRadius: '8px',
+          }}
+        >
+          <X size={20} />
+        </button>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
+          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 'var(--space-2)' }}>
             Create Account
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.925rem' }}>
-            Join Aurora Store to start demonstration shopping
+            Join VisionBuy to start demonstration shopping
           </p>
         </div>
 
@@ -77,14 +123,14 @@ export default function Register() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.65rem',
-              padding: '0.75rem 1rem',
+              gap: 'var(--space-2)',
+              padding: 'var(--space-3) var(--space-4)',
               borderRadius: 'var(--radius-md)',
               background: 'var(--danger-bg)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
+              border: '1px solid rgba(239, 68, 68, 0.25)',
               color: '#fca5a5',
               fontSize: '0.875rem',
-              marginBottom: '1.5rem',
+              marginBottom: 'var(--space-5)',
             }}
           >
             <AlertCircle size={18} />
@@ -175,7 +221,7 @@ export default function Register() {
           </div>
 
           {/* Confirm Password Field */}
-          <div className="form-group" style={{ marginBottom: '1.75rem' }}>
+          <div className="form-group" style={{ marginBottom: 'var(--space-6)' }}>
             <label className="form-label" htmlFor="confirmPassword">
               Confirm Password
             </label>
@@ -205,7 +251,7 @@ export default function Register() {
           <button
             type="submit"
             className="btn btn-primary"
-            style={{ width: '100%', padding: '0.8rem', fontSize: '1rem', marginBottom: '1.25rem' }}
+            style={{ width: '100%', padding: '0.8rem', fontSize: '1rem', marginBottom: 'var(--space-4)' }}
             disabled={loading}
           >
             {loading ? 'Creating Account...' : 'Create Account'} <ArrowRight size={18} />
@@ -213,7 +259,7 @@ export default function Register() {
         </form>
 
         {/* Footer Link */}
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+        <p style={{ textAlign: 'center', marginTop: 'var(--space-5)', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
           Already have an account?{' '}
           <Link to="/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>
             Sign In

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, Lock, AlertCircle, ArrowRight, X } from 'lucide-react';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -65,10 +65,56 @@ export default function Login() {
   };
 
   return (
-    <div style={{ maxWidth: '440px', margin: '3rem auto', padding: '0 1rem' }}>
-      <div className="glass-card" style={{ padding: '2.5rem 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.72)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1.5rem',
+        overflowY: 'auto',
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) navigate('/');
+      }}
+    >
+      <div
+        className="ui-card"
+        style={{
+          width: '100%',
+          maxWidth: '440px',
+          padding: 'var(--space-8) var(--space-6)',
+          position: 'relative',
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+          borderRadius: '20px',
+        }}
+      >
+        <button
+          onClick={() => navigate('/')}
+          aria-label="Close"
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--text-dim)',
+            cursor: 'pointer',
+            padding: '0.4rem',
+            borderRadius: '8px',
+          }}
+        >
+          <X size={20} />
+        </button>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
+          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 'var(--space-2)' }}>
             Welcome Back
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.925rem' }}>
@@ -83,14 +129,14 @@ export default function Login() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.65rem',
-              padding: '0.75rem 1rem',
+              gap: 'var(--space-2)',
+              padding: 'var(--space-3) var(--space-4)',
               borderRadius: 'var(--radius-md)',
               background: 'var(--danger-bg)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
+              border: '1px solid rgba(239, 68, 68, 0.25)',
               color: '#fca5a5',
               fontSize: '0.875rem',
-              marginBottom: '1.5rem',
+              marginBottom: 'var(--space-5)',
             }}
           >
             <AlertCircle size={18} />
@@ -127,7 +173,7 @@ export default function Login() {
           </div>
 
           {/* Password Field */}
-          <div className="form-group" style={{ marginBottom: '1.75rem' }}>
+          <div className="form-group" style={{ marginBottom: 'var(--space-6)' }}>
             <label className="form-label" htmlFor="password">
               Password
             </label>
@@ -157,7 +203,7 @@ export default function Login() {
           <button
             type="submit"
             className="btn btn-primary"
-            style={{ width: '100%', padding: '0.8rem', fontSize: '1rem', marginBottom: '1.25rem' }}
+            style={{ width: '100%', padding: '0.8rem', fontSize: '1rem', marginBottom: 'var(--space-4)' }}
             disabled={loading}
           >
             {loading ? 'Signing in...' : 'Sign In'} <ArrowRight size={18} />
@@ -168,14 +214,14 @@ export default function Login() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '1rem',
-          margin: '1.5rem 0',
+          gap: 'var(--space-3)',
+          margin: 'var(--space-5) 0',
           color: 'var(--text-dim)',
           fontSize: '0.825rem',
         }}>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-glass)' }} />
+          <div style={{ flex: 1, height: '1px', background: 'var(--border-subtle)' }} />
           <span>OR</span>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-glass)' }} />
+          <div style={{ flex: 1, height: '1px', background: 'var(--border-subtle)' }} />
         </div>
 
         {/* Google OAuth Button */}
@@ -208,7 +254,7 @@ export default function Login() {
         </button>
 
         {/* Footer Link */}
-        <p style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+        <p style={{ textAlign: 'center', marginTop: 'var(--space-6)', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
           Don't have an account?{' '}
           <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>
             Create one

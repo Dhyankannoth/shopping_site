@@ -51,50 +51,50 @@ export default function OrderConfirmation() {
   }
 
   return (
-    <div style={{ maxWidth: '800px', margin: '1rem auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ maxWidth: '800px', margin: 'var(--space-4) auto', display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
       {/* Success Hero Card */}
       <div
-        className="glass-card animate-fade-in"
+        className="ui-card"
         style={{
           textAlign: 'center',
-          padding: '3rem 2rem',
-          background: 'radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15) 0%, rgba(17, 24, 39, 0.75) 70%)',
-          border: '1px solid rgba(16, 185, 129, 0.3)',
+          padding: 'var(--space-8) var(--space-6)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
         }}
       >
         <div
           style={{
             width: '64px',
             height: '64px',
-            borderRadius: '50%',
+            borderRadius: 'var(--radius-md)',
             background: 'var(--success-bg)',
-            border: '2px solid var(--success)',
+            border: '1px solid var(--success)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '0 auto 1.25rem',
+            margin: '0 auto var(--space-4)',
           }}
         >
           <CheckCircle2 size={36} color="var(--success)" />
         </div>
 
-        <h1 style={{ fontSize: '2.25rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+        <h1 style={{ fontSize: '2.25rem', fontWeight: 800, marginBottom: 'var(--space-2)' }}>
           Demonstration Order Confirmed!
         </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1rem', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1rem', maxWidth: '500px', margin: '0 auto var(--space-6)' }}>
           Your sample order has been recorded into PostgreSQL. No payment was charged.
         </p>
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-surface-elevated)', padding: '0.5rem 1.25rem', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-glass)' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)', background: 'var(--bg-surface-elevated)', padding: '0.5rem 1.25rem', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-subtle)' }}>
           <span style={{ fontSize: '0.85rem', color: 'var(--text-dim)' }}>Order Reference:</span>
           <strong style={{ letterSpacing: '0.05em', color: 'var(--text-main)' }}>{order.order_number}</strong>
         </div>
       </div>
 
       {/* Order Snapshot Receipt */}
-      <div className="glass-card" style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-glass)', paddingBottom: '1.25rem', marginBottom: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div className="ui-card" style={{ padding: 'var(--space-8)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)', paddingBottom: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
             <Receipt size={20} color="var(--primary)" />
             <h2 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Order Snapshot Receipt</h2>
           </div>
@@ -104,7 +104,7 @@ export default function OrderConfirmation() {
         </div>
 
         {/* Metadata */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '1.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-dim)', fontSize: '0.825rem', marginBottom: '0.25rem' }}>
               <Calendar size={14} /> Date Placed
@@ -128,11 +128,11 @@ export default function OrderConfirmation() {
         </div>
 
         {/* Line Items Table */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
+        <div style={{ marginBottom: 'var(--space-6)' }}>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: 'var(--space-3)' }}>
             Purchased Products
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             {order.items?.map((item, idx) => (
               <div
                 key={idx}
@@ -140,9 +140,10 @@ export default function OrderConfirmation() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '0.75rem 1rem',
+                  padding: 'var(--space-3) var(--space-4)',
                   borderRadius: 'var(--radius-md)',
                   background: 'var(--bg-surface-elevated)',
+                  border: '1px solid var(--border-subtle)',
                 }}
               >
                 <div>
@@ -151,7 +152,7 @@ export default function OrderConfirmation() {
                     ${Number(item.unit_price).toFixed(2)} × {item.quantity} unit{item.quantity > 1 ? 's' : ''}
                   </div>
                 </div>
-                <div style={{ fontWeight: 800, fontSize: '1.05rem' }}>
+                <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em' }}>
                   ${Number(item.line_total).toFixed(2)}
                 </div>
               </div>
@@ -160,7 +161,7 @@ export default function OrderConfirmation() {
         </div>
 
         {/* Financial Summary */}
-        <div style={{ borderTop: '1px solid var(--border-glass)', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
             <span>Subtotal</span>
             <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>${Number(order.subtotal).toFixed(2)}</span>
@@ -169,9 +170,9 @@ export default function OrderConfirmation() {
             <span>Demonstration Shipping</span>
             <span style={{ color: 'var(--success)', fontWeight: 600 }}>FREE</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid var(--border-glass)', paddingTop: '0.75rem', marginTop: '0.25rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-3)', marginTop: '0.25rem' }}>
             <span style={{ fontSize: '1.15rem', fontWeight: 800 }}>Total Paid</span>
-            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--primary-light)' }}>
+            <span style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
               ${Number(order.total_amount).toFixed(2)}
             </span>
           </div>

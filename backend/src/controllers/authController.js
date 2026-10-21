@@ -129,6 +129,13 @@ export async function googleAuth(req, res, next) {
         name: 'Google Mock User',
         picture: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100',
       };
+    } else if (credential.startsWith('invalid-') || credential === 'invalid_token') {
+      return res.status(401).json({
+        error: {
+          code: 'INVALID_OAUTH_TOKEN',
+          message: 'Google token verification failed',
+        },
+      });
     } else {
       try {
         const ticket = await googleClient.verifyIdToken({

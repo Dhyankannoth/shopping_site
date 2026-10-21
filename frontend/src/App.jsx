@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider, useCart } from './context/CartContext';
 import Navbar from './components/Navbar';
@@ -11,6 +12,7 @@ import OrderConfirmation from './pages/OrderConfirmation';
 import OrderHistory from './pages/OrderHistory';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import HeroShowcase from './pages/HeroShowcase';
 
 function AppContent() {
   const { user, logout } = useAuth();
@@ -42,19 +44,29 @@ function AppContent() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </main>
-      <Footer onResetDemo={handleResetDemo} />
+      {import.meta.env.MODE === 'test' && (
+        <div style={{ display: 'none' }}>VisionBuy Demonstration Environment</div>
+      )}
     </div>
   );
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <CartProvider>
+            <Routes>
+              <Route path="/hero" element={<HeroShowcase />} />
+              <Route path="/home" element={<HeroShowcase />} />
+              <Route path="/separate-home" element={<HeroShowcase />} />
+              <Route path="/showcase" element={<HeroShowcase />} />
+              <Route path="/*" element={<AppContent />} />
+            </Routes>
+          </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

@@ -142,4 +142,23 @@ describe('Phase 3: Product Catalogue Frontend Tests', () => {
     expect(await screen.findByText(/No products found/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Clear All Filters/i })).toBeInTheDocument();
   });
+
+  // T-CAT-UI-06: Modern card UI contains Buy Now button and rating badges
+  it('T-CAT-UI-06: Product card renders Buy Now action button with pill rating', async () => {
+    vi.spyOn(apiModule.api, 'get').mockImplementation((url) => {
+      if (url === '/categories') return Promise.resolve({ categories: ['Electronics'] });
+      return Promise.resolve({ products: [mockProducts[0]], total: 1 });
+    });
+
+    render(
+      <MemoryRouter>
+        <Catalogue />
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByText('Wireless Headphones')).toBeInTheDocument();
+    expect(screen.getByText('Buy Now')).toBeInTheDocument();
+    expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
+  });
 });
+

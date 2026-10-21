@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
+import AuthModal from '../components/AuthModal';
 
 const AuthContext = createContext(null);
 
@@ -7,6 +8,19 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
+
+  // Modal state
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login');
+
+  const openAuthModal = (mode = 'login') => {
+    setAuthModalMode(mode);
+    setAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false);
+  };
 
   // Restore authenticated session if token exists
   useEffect(() => {
@@ -73,9 +87,18 @@ export function AuthProvider({ children }) {
         register,
         loginWithGoogle,
         logout,
+        authModalOpen,
+        authModalMode,
+        openAuthModal,
+        closeAuthModal,
       }}
     >
       {children}
+      <AuthModal
+        isOpen={authModalOpen}
+        initialMode={authModalMode}
+        onClose={closeAuthModal}
+      />
     </AuthContext.Provider>
   );
 }
@@ -83,7 +106,20 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    return {
+      user: null,
+      token: null,
+      loading: false,
+      isAuthenticated: false,
+      login: async () => {},
+      register: async () => {},
+      loginWithGoogle: async () => {},
+      logout: () => {},
+      authModalOpen: false,
+      authModalMode: 'login',
+      openAuthModal: () => {},
+      closeAuthModal: () => {},
+    };
   }
   return context;
 }
